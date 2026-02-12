@@ -2,15 +2,29 @@
 
 Turn your LinkedIn data export into an interactive browser dashboard. Analyze your connections, content, activity patterns, and network clusters — entirely offline.
 
+![Overview](screenshots/01-overview.png)
+
 ## Features
 
 **Connections** — Browse all your connections with a stackable multi-filter system. Filter by seniority level, company, connection year, or position keywords. Add multiple filters, remove any with one click.
 
-**Network Visualization** — See your network by company, seniority, growth over time, and clusters. Identify where your network is concentrated and spot dormant relationships.
+![Connections with filters](screenshots/02-connections.png)
 
 **Post Analysis** — Every post you've published with content preview, type classification (Long Text, Short Text, Media, Link Share, Repost), word count analysis, day/hour patterns, and direct links to the original.
 
+![Post analysis](screenshots/03-posts.png)
+
+**Network Growth** — Track how your network has grown over time with cumulative and monthly views.
+
+![Growth timeline](screenshots/04-growth.png)
+
 **Activity Patterns** — Track your posting, commenting, and reaction activity over time. See which reaction types you use most.
+
+![Activity patterns](screenshots/05-activity.png)
+
+**Network Clusters** — Identify companies where your network is concentrated.
+
+![Clusters](screenshots/06-clusters.png)
 
 ## Quick Start
 
@@ -39,7 +53,7 @@ open dashboard.html
 
 That's it. One HTML file, no server needed.
 
-## Dashboard Overview
+## Dashboard Tabs
 
 | Tab | What's Inside |
 |---|---|
@@ -53,7 +67,7 @@ That's it. One HTML file, no server needed.
 | **Clusters** | Companies with 5+ connections |
 | **Dormant** | Connections older than 2 years |
 
-## How the Filter System Works
+## Filter System
 
 On the Connections tab, click **+ Add Filter** to open the filter builder:
 
@@ -70,22 +84,13 @@ Your data stays local. Nothing is sent to any server.
 
 - The script reads your LinkedIn CSV files and generates a static HTML file
 - The HTML contains your data as embedded JSON — **do not publish it**
-- `.gitignore` is preconfigured to exclude:
-  - All LinkedIn export folders and CSVs
-  - Generated `dashboard.html`
-  - Any `.xlsx` files
+- `.gitignore` is preconfigured to exclude all LinkedIn exports, CSVs, and generated files
 
-**Before pushing to GitHub**, verify with:
-
-```bash
-git status
-```
-
-You should only see `build_dashboard.py`, `SKILL.md`, `README.md`, `.gitignore`, and `examples/` — never your personal data.
+**Before pushing to GitHub**, verify with `git status` — you should never see your personal data listed.
 
 ## Limitations
 
-- **No likes/views/impressions**: LinkedIn's data export doesn't include engagement metrics (impressions, reactions received, views) on your posts. Only your content and outbound activity are exported.
+- **No likes/views/impressions**: LinkedIn's data export doesn't include engagement metrics on your posts. Only your content and outbound activity are exported.
 - **Comment counts are partial**: Shows your own replies per post, not total comments from others.
 - **Seniority detection is heuristic**: Based on keyword matching in job titles — may misclassify unusual titles.
 
@@ -98,14 +103,14 @@ You should only see `build_dashboard.py`, `SKILL.md`, `README.md`, `.gitignore`,
 ## Project Structure
 
 ```
-.
-├── build_dashboard.py    # Main script — generates dashboard.html
-├── SKILL.md              # Detailed skill documentation
-├── README.md             # This file
-├── .gitignore            # Protects personal data from git
+├── build_dashboard.py          # Main script — generates dashboard.html
+├── generate_mock_dashboard.py  # Generate demo dashboard with sample data
+├── take_screenshots.py         # Capture dashboard screenshots
+├── SKILL.md                    # Detailed skill documentation
+├── README.md
+├── .gitignore
+├── screenshots/                # Dashboard screenshots for README
 └── examples/
-    ├── sample_connections.csv
-    ├── sample_posts.csv
     └── workflow_*.md
 ```
 

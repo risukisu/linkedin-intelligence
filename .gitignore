@@ -12,6 +12,7 @@ Messages.csv
 
 # Generated output
 dashboard.html
+mock_dashboard.html
 *.xlsx
 
 # OS
