@@ -28,6 +28,8 @@ Turn your LinkedIn data export into an interactive browser dashboard. Analyze yo
 
 **Natural Language Queries** — Ask questions about your data in plain English. "Who do I know at Google?", "Summarize my posts about AI", "Show me VP-level connections" — powered by Claude.
 
+![Natural language query](screenshots/07-natural-language-query.png)
+
 ## Quick Start
 
 ### 1. Export your LinkedIn data
