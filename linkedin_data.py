@@ -14,11 +14,18 @@ def find_export_dir(base_dir=None):
     """Auto-detect LinkedIn export directory."""
     if base_dir is None:
         base_dir = os.path.dirname(os.path.abspath(__file__))
-    candidates = glob.glob(os.path.join(base_dir, "Complete_LinkedInDataExport_*"))
+    search_dirs = [base_dir, os.path.join(base_dir, "data exports")]
+    patterns = ["Complete_LinkedInDataExport_*", "Basic_LinkedInDataExport_*"]
+    candidates = []
+    for d in search_dirs:
+        for p in patterns:
+            candidates.extend(glob.glob(os.path.join(d, p)))
+    # Only keep directories (not zip files)
+    candidates = [c for c in candidates if os.path.isdir(c)]
     if candidates:
         return max(candidates, key=os.path.getmtime)
     raise FileNotFoundError(
-        "No LinkedIn export found. Place your Complete_LinkedInDataExport_* folder in the project directory."
+        "No LinkedIn export found. Place your LinkedInDataExport folder in the project directory or 'data exports' subfolder."
     )
 
 
@@ -69,6 +76,10 @@ def load_connections(export_dir):
 def load_shares(export_dir):
     """Load and process Shares.csv."""
     path = os.path.join(export_dir, "Shares.csv")
+    if not os.path.exists(path):
+        df = pd.DataFrame(columns=["Date", "ShareCommentary", "ShareLink", "SharedUrl", "MediaUrl", "Visibility"])
+        df["Date"] = pd.to_datetime(df["Date"])
+        return df
     df = pd.read_csv(path, on_bad_lines="skip", engine="python")
     df.columns = df.columns.str.strip()
     df["Date"] = pd.to_datetime(df["Date"], format="mixed", errors="coerce")
@@ -78,6 +89,10 @@ def load_shares(export_dir):
 def load_comments(export_dir):
     """Load and process Comments.csv."""
     path = os.path.join(export_dir, "Comments.csv")
+    if not os.path.exists(path):
+        df = pd.DataFrame(columns=["Date", "Message", "Link"])
+        df["Date"] = pd.to_datetime(df["Date"])
+        return df
     df = pd.read_csv(path, on_bad_lines="skip", engine="python")
     df.columns = df.columns.str.strip()
     df["Date"] = pd.to_datetime(df["Date"], format="mixed", errors="coerce")
@@ -87,6 +102,10 @@ def load_comments(export_dir):
 def load_reactions(export_dir):
     """Load and process Reactions.csv."""
     path = os.path.join(export_dir, "Reactions.csv")
+    if not os.path.exists(path):
+        df = pd.DataFrame(columns=["Date", "Type", "Link"])
+        df["Date"] = pd.to_datetime(df["Date"])
+        return df
     df = pd.read_csv(path, on_bad_lines="skip", engine="python")
     df.columns = df.columns.str.strip()
     df["Date"] = pd.to_datetime(df["Date"], format="mixed", errors="coerce")

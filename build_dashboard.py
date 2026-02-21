@@ -8,7 +8,7 @@ import json
 import os
 from datetime import datetime, timedelta
 
-from linkedin_data import find_export_dir, load_connections, load_shares, load_comments, load_reactions, enrich_posts
+from linkedin_data import find_export_dir, load_connections, load_shares, load_comments, load_reactions, load_profile, enrich_posts
 
 EXPORT_DIR = find_export_dir()
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard.html")
@@ -23,6 +23,14 @@ conn_df = load_connections(EXPORT_DIR)
 shares_df = load_shares(EXPORT_DIR)
 comments_df = load_comments(EXPORT_DIR)
 reactions_df = load_reactions(EXPORT_DIR)
+profile_df = load_profile(EXPORT_DIR)
+if profile_df is not None and len(profile_df) > 0:
+    p = profile_df.iloc[0]
+    profile_name = f"{p.get('First Name', '')} {p.get('Last Name', '')}".strip()
+    profile_headline = str(p.get("Headline", "")) if pd.notna(p.get("Headline")) else ""
+else:
+    profile_name = "Your Network"
+    profile_headline = ""
 
 # =====================
 # POST ENRICHMENT — match comments to posts by URL
@@ -318,7 +326,7 @@ tbody tr:hover {{ background:var(--blue-light); }}
   <div class="header-inner">
     <div>
       <h1>LinkedIn Intelligence</h1>
-      <p>Pavel Averin — Operations Director @ Netguru</p>
+      <p>{profile_name} — {profile_headline}</p>
     </div>
     <div class="header-right">
       {stats["total_connections"]:,} connections<br>
