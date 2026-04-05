@@ -1,6 +1,6 @@
 # LinkedIn Intelligence
 
-![CANDOR: copilot](https://img.shields.io/badge/䷼%20CANDOR-copilot-fee2e2?labelColor=fee2e2)
+[![CANDOR: copilot](https://img.shields.io/badge/䷼%20CANDOR-copilot-fee2e2?labelColor=fee2e2)](https://github.com/DimwitLabs/CANDOR.md)
 
 Turn your LinkedIn data export into an interactive browser dashboard. Analyze your connections, content, activity patterns, and network clusters — entirely offline.
 
@@ -179,4 +179,4 @@ MIT
 
 ---
 
-Built with [Claude Code](https://claude.ai/code) as copilot. [CANDOR: copilot](https://candor.md) — AI writes the code, I make the decisions.
+Built with [Claude Code](https://claude.ai/code) as copilot. [CANDOR: copilot](https://github.com/DimwitLabs/CANDOR.md) — AI writes the code, I make the decisions.
