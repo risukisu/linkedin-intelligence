@@ -1,5 +1,7 @@
 # LinkedIn Intelligence
 
+![CANDOR: copilot](https://img.shields.io/badge/䷼%20CANDOR-copilot-fee2e2?labelColor=fee2e2)
+
 Turn your LinkedIn data export into an interactive browser dashboard. Analyze your connections, content, activity patterns, and network clusters — entirely offline.
 
 ![Overview](screenshots/01-overview.png)
@@ -174,3 +176,7 @@ Your data stays local. Nothing is sent to any server.
 ## License
 
 MIT
+
+---
+
+Built with [Claude Code](https://claude.ai/code) as copilot. [CANDOR: copilot](https://candor.md) — AI writes the code, I make the decisions.
